@@ -59,22 +59,49 @@ function ContestPage() {
       title={contest.title}
       description={contest.summary}
     >
-      <nav className="mb-10 flex flex-wrap gap-2">
+      <nav className="mb-10 flex flex-wrap gap-2" aria-label="Questions">
         {contest.questions.map((q, i) => (
-          <a
+          <button
             key={q.slug}
-            href={`#${q.slug}`}
-            className="rounded-md border border-border px-3 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:border-accent-strong/50 hover:text-foreground"
+            type="button"
+            onClick={() => setActive(i)}
+            aria-current={active === i}
+            className={
+              active === i
+                ? "rounded-md border border-accent-strong/60 bg-code px-3 py-1.5 font-mono text-xs text-foreground transition-colors"
+                : "rounded-md border border-border px-3 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:border-accent-strong/50 hover:text-foreground"
+            }
           >
             Q{String(i + 1).padStart(2, "0")} · {q.title}
-          </a>
+          </button>
         ))}
       </nav>
 
-      <div className="space-y-14">
-        {contest.questions.map((q, i) => (
-          <QuestionSection key={q.slug} index={i + 1} question={q} />
-        ))}
+      {contest.questions[active] && (
+        <QuestionSection
+          key={contest.questions[active].slug}
+          index={active + 1}
+          question={contest.questions[active]}
+        />
+      )}
+
+      <div className="mt-10 flex items-center justify-between gap-3">
+        <button
+          type="button"
+          disabled={active === 0}
+          onClick={() => setActive((i) => Math.max(0, i - 1))}
+          className="rounded-md border border-border px-3 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
+        >
+          ← Previous
+        </button>
+        <button
+          type="button"
+          disabled={active === contest.questions.length - 1}
+          onClick={() => setActive((i) => Math.min(contest.questions.length - 1, i + 1))}
+          className="rounded-md border border-border px-3 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground disabled:pointer-events-none disabled:opacity-40"
+        >
+          Next →
+        </button>
       </div>
 
       <div className="mt-16 border-t border-border pt-8">
