@@ -34,6 +34,10 @@ function ContestPage() {
   const contest = getContest(contestId);
   const [active, setActive] = useState(0);
 
+  useEffect(() => {
+    setActive(0);
+  }, [contestId]);
+
   if (!contest) {
     return (
       <PageShell title="Contest not found" description="This round doesn't exist in the archive.">
