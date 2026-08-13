@@ -84,7 +84,7 @@ export function QuestionSection({ index, question }: { index: number; question: 
                   src={img.src}
                   alt={img.alt}
                   loading="lazy"
-                  className="h-48 w-full object-cover"
+                  className="max-h-64 w-full bg-code object-contain p-3"
                 />
                 {img.caption && (
                   <figcaption className="border-t border-border px-3 py-2 text-xs text-muted-foreground">
