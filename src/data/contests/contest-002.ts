@@ -1,4 +1,5 @@
 import type { Contest } from "../types";
+import staircaseDiagram from "@/assets/staircase-cost.jpg";
 
 export const contest002: Contest = {
   id: "ascent-weekly-2",
@@ -63,7 +64,7 @@ export const contest002: Contest = {
       spaceComplexity: "O(1)",
       images: [
         {
-          src: "https://images.unsplash.com/photo-1516575334481-f85287c2c82d?auto=format&fit=crop&w=1200&q=60",
+          src: staircaseDiagram,
           alt: "Staircase illustrating the three possible jump lengths",
           caption: "Each step can be reached from one, two or three steps below.",
         },
