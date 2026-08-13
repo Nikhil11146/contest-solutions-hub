@@ -25,7 +25,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const latest = contests[0];
+  const latest = contests[0]!;
 
   return (
     <div className="mx-auto max-w-5xl px-5">

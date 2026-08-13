@@ -14,6 +14,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as RulesRouteImport } from './routes/rules'
+import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as SolutionsIndexRouteImport } from './routes/solutions.index'
 import { Route as SolutionsContestIdRouteImport } from './routes/solutions.$contestId'
 
@@ -42,15 +43,20 @@ const RulesRoute = RulesRouteImport.update({
   path: '/rules',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SolutionsIndexRoute = SolutionsIndexRouteImport.update({
-  id: '/solutions/',
-  path: '/solutions/',
+const SolutionsRoute = SolutionsRouteImport.update({
+  id: '/solutions',
+  path: '/solutions',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SolutionsIndexRoute = SolutionsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SolutionsRoute,
+} as any)
 const SolutionsContestIdRoute = SolutionsContestIdRouteImport.update({
-  id: '/solutions/$contestId',
-  path: '/solutions/$contestId',
-  getParentRoute: () => rootRouteImport,
+  id: '/$contestId',
+  path: '/$contestId',
+  getParentRoute: () => SolutionsRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/leaderboard': typeof LeaderboardRoute
   '/rules': typeof RulesRoute
+  '/solutions': typeof SolutionsRouteWithChildren
   '/solutions/$contestId': typeof SolutionsContestIdRoute
   '/solutions/': typeof SolutionsIndexRoute
 }
@@ -78,6 +85,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/leaderboard': typeof LeaderboardRoute
   '/rules': typeof RulesRoute
+  '/solutions': typeof SolutionsRouteWithChildren
   '/solutions/$contestId': typeof SolutionsContestIdRoute
   '/solutions/': typeof SolutionsIndexRoute
 }
@@ -89,6 +97,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/leaderboard'
     | '/rules'
+    | '/solutions'
     | '/solutions/$contestId'
     | '/solutions/'
   fileRoutesByTo: FileRoutesByTo
@@ -107,6 +116,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/leaderboard'
     | '/rules'
+    | '/solutions'
     | '/solutions/$contestId'
     | '/solutions/'
   fileRoutesById: FileRoutesById
@@ -117,8 +127,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   LeaderboardRoute: typeof LeaderboardRoute
   RulesRoute: typeof RulesRoute
-  SolutionsContestIdRoute: typeof SolutionsContestIdRoute
-  SolutionsIndexRoute: typeof SolutionsIndexRoute
+  SolutionsRoute: typeof SolutionsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -158,22 +167,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RulesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/solutions': {
+      id: '/solutions'
+      path: '/solutions'
+      fullPath: '/solutions'
+      preLoaderRoute: typeof SolutionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/solutions/': {
       id: '/solutions/'
-      path: '/solutions'
+      path: '/'
       fullPath: '/solutions/'
       preLoaderRoute: typeof SolutionsIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof SolutionsRoute
     }
     '/solutions/$contestId': {
       id: '/solutions/$contestId'
-      path: '/solutions/$contestId'
+      path: '/$contestId'
       fullPath: '/solutions/$contestId'
       preLoaderRoute: typeof SolutionsContestIdRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof SolutionsRoute
     }
   }
 }
+
+interface SolutionsRouteChildren {
+  SolutionsContestIdRoute: typeof SolutionsContestIdRoute
+  SolutionsIndexRoute: typeof SolutionsIndexRoute
+}
+
+const SolutionsRouteChildren: SolutionsRouteChildren = {
+  SolutionsContestIdRoute: SolutionsContestIdRoute,
+  SolutionsIndexRoute: SolutionsIndexRoute,
+}
+
+const SolutionsRouteWithChildren = SolutionsRoute._addFileChildren(
+  SolutionsRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -181,8 +211,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   LeaderboardRoute: LeaderboardRoute,
   RulesRoute: RulesRoute,
-  SolutionsContestIdRoute: SolutionsContestIdRoute,
-  SolutionsIndexRoute: SolutionsIndexRoute,
+  SolutionsRoute: SolutionsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
