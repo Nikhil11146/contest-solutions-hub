@@ -31,6 +31,7 @@ export const Route = createFileRoute("/solutions/$contestId")({
 function ContestPage() {
   const { contestId } = Route.useParams();
   const contest = getContest(contestId);
+  const [active, setActive] = useState(0);
 
   if (!contest) {
     return (
