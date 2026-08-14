@@ -1,13 +1,21 @@
+/* eslint-disable prettier/prettier */
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 import type { CodeSnippets } from "@/data/types";
 import { cn } from "@/lib/utils";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { useEffect } from "react";
+import {
+  vscDarkPlus,
+  oneLight,
+} from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const langs = [
   { key: "cpp", label: "C++" },
   { key: "python", label: "Python" },
   { key: "java", label: "Java" },
 ] as const;
+
 
 type LangKey = (typeof langs)[number]["key"];
 
@@ -24,6 +32,43 @@ export function CodeTabs({ code }: { code: CodeSnippets }) {
       /* clipboard unavailable */
     }
   };
+
+  const removeBackgrounds = (style: typeof vscDarkPlus) => {
+    const result = { ...style };
+
+    for (const key in result) {
+      const rule = result[key];
+
+      if (typeof rule === "object" && rule !== null) {
+        const cleaned = { ...rule };
+        delete cleaned.background;
+        delete cleaned.backgroundColor;
+        result[key] = cleaned;
+      }
+    }
+
+    return result;
+  };
+
+  const darkCodeStyle = removeBackgrounds(vscDarkPlus);
+  const lightCodeStyle = removeBackgrounds(oneLight);
+
+  const [isDark, setIsDark] = useState(
+    document.documentElement.classList.contains("dark"),
+  );
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains("dark"));
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="overflow-hidden rounded-lg border border-border bg-code">
@@ -61,9 +106,25 @@ export function CodeTabs({ code }: { code: CodeSnippets }) {
           {copied ? "Copied" : "Copy"}
         </button>
       </div>
-      <pre className="overflow-x-auto px-4 py-4 text-[13px] leading-relaxed">
-        <code className="font-mono text-foreground">{code[active]}</code>
-      </pre>
+      <SyntaxHighlighter
+        language={active}
+        style={isDark ? darkCodeStyle : lightCodeStyle}
+        customStyle={{
+          margin: 0,
+          padding: "1rem",
+          fontFamily: '"JetBrains Mono", monospace',
+          fontSize: "13px",
+          lineHeight: "1.8",
+          background: "transparent",
+        }}
+        codeTagProps={{
+          style: {
+            fontFamily: '"JetBrains Mono", monospace',
+          },
+        }}
+      >
+        {code[active]}
+      </SyntaxHighlighter>
     </div>
   );
 }
