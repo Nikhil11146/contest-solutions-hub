@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/page-shell";
 
@@ -24,8 +25,8 @@ export const Route = createFileRoute("/contact")({
 const channels = [
   {
     label: "Email",
-    value: "hello@ascent.contest",
-    href: "mailto:hello@ascent.contest",
+    value: "coding@nitandhra.ac.in",
+    href: "mailto:coding@nitandhra.ac.in",
     note: "Editorial corrections, problem proposals, anything long-form.",
   },
   {

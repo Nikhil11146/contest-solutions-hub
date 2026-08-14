@@ -57,8 +57,9 @@ function Index() {
           </Link>
         </div>
       </section>
-
-      <section className="border-b border-border py-14">
+      {
+        latest && (
+          <section className="border-b border-border py-14">
         <div className="mb-6 flex items-baseline justify-between">
           <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
             Latest round
@@ -94,6 +95,8 @@ function Index() {
           </div>
         </Link>
       </section>
+        )
+      }
 
       <section className="grid gap-8 py-14 sm:grid-cols-3">
         {[
