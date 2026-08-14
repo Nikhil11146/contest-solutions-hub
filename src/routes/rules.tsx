@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/page-shell";
 
@@ -25,15 +26,15 @@ const sections = [
   {
     title: "Format",
     items: [
-      "Every contest runs for 90 minutes and contains three questions of increasing difficulty.",
-      "Contests start Sunday at 19:00 IST. Editorials go live the same evening.",
+      "Every contest runs for 90 minutes and contains five questions of increasing difficulty.",
+      "Contests start Saturday at 14:30 IST. Editorials go live the same evening.",
       "Any language supported by the judge is allowed; reference solutions are published in C++, Python and Java.",
     ],
   },
   {
     title: "Scoring",
     items: [
-      "Questions are worth 100, 200 and 300 points respectively.",
+      "Questions are worth 10 -  50 points respectively.",
       "Ties are broken by total finish time, measured from contest start to the last accepted submission.",
       "Each rejected submission adds a 5-minute penalty to the finish time.",
     ],

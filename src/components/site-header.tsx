@@ -6,7 +6,7 @@ import { SITE_NAME } from "@/data";
 
 const links = [
   { to: "/solutions", label: "Solutions" },
-  { to: "/leaderboard", label: "Leaderboard" },
+  // { to: "/leaderboard", label: "Leaderboard" },
   { to: "/rules", label: "Rules" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },

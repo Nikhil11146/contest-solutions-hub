@@ -31,7 +31,7 @@ function AboutPage() {
     >
       <div className="max-w-2xl space-y-5 text-sm leading-relaxed text-muted-foreground sm:text-base">
         <p>
-          Ascent runs every Sunday. Three questions, ninety minutes, an easy warm-up and a hard
+          Ascent runs every Saturday. Five questions, ninety minutes, an easy warm-up and a hard
           finisher — enough to be a real test without eating the whole weekend.
         </p>
         <p>

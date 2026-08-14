@@ -29,17 +29,10 @@ const channels = [
     note: "Editorial corrections, problem proposals, anything long-form.",
   },
   {
-    label: "Discord",
-    value: "discord.gg/ascent",
-    href: "https://discord.gg",
-    note: "Live discussion during the round and upsolving afterwards.",
-  },
-  {
-    label: "GitHub",
-    value: "github.com/ascent-contest",
-    href: "https://github.com",
-    note: "Reference solutions and test data for every past round.",
-  },
+    label: "Phone",
+    value: "+91 9618307759",
+    note: "Contact an Admin",
+  }
 ];
 
 function ContactPage() {

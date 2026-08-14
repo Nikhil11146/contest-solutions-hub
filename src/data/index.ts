@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import type { Contest, LeaderboardRow } from "./types";
 import { contest001 } from "./contests/contest-001";
 import { contest002 } from "./contests/contest-002";
@@ -6,7 +7,7 @@ export const SITE_NAME = "Ascent";
 export const SITE_TAGLINE = "Weekly competitive programming contests and editorials.";
 
 /** Newest first. Add a new contest file and prepend it here. */
-export const contests: Contest[] = [contest002, contest001];
+export const contests: Contest[] = [contest001];
 
 export function getContest(id: string): Contest | undefined {
   return contests.find((c) => c.id === id);
