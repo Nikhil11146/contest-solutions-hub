@@ -6,7 +6,7 @@ export const SITE_NAME = "Ascent";
 export const SITE_TAGLINE = "Weekly competitive programming contests and editorials.";
 
 /** Newest first. Add a new contest file and prepend it here. */
-export const contests: Contest[] = [contest001];
+export const contests: Contest[] = [];
 
 export function getContest(id: string): Contest | undefined {
   return contests.find((c) => c.id === id);
