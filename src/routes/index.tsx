@@ -32,7 +32,7 @@ function Index() {
     <div className="mx-auto max-w-5xl px-5">
       <section className="border-b border-border py-20 sm:py-28">
         <p className="mb-4 font-mono text-xs uppercase tracking-[0.25em] text-accent-strong">
-          Every Sunday · 19:00 IST
+          Every Saturday · 14:30 IST
         </p>
         <h1 className="max-w-3xl text-4xl font-semibold leading-[1.1] tracking-tight text-foreground sm:text-6xl">
           {SITE_NAME}
