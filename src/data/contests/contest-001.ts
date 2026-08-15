@@ -14,7 +14,7 @@ export const contest001: Contest = {
   title: "Handshake",
   tags: ["Math", "Combinatorics"],
   difficulty: "Easy",
-  acceptanceRate: 0,
+  acceptanceRate: 94.12,
   statement: [
     "At the annual meeting of Board of Directors of Acme Inc., everyone attending shakes hands exactly once with every other attendee.",
     "Given the number of attendees, determine the total number of handshakes that take place."
@@ -64,7 +64,7 @@ export const contest001: Contest = {
   title: "Happy Ladybugs",
   tags: ["Greedy", "String", "Counting"],
   difficulty: "Easy",
-  acceptanceRate: 0,
+  acceptanceRate: 85.00,
   statement: [
     "Happy Ladybugs is a board game represented by a string b of length n. Each character represents a cell on the board.",
     "An underscore (_) represents an empty cell. An uppercase English letter represents a ladybug of that color.",
@@ -249,7 +249,7 @@ export const contest001: Contest = {
   title: "Hackerland Radio Transmitters",
   tags: ["Greedy", "Sorting"],
   difficulty: "Medium",
-  acceptanceRate: 0,
+  acceptanceRate: 100.00,
   statement: [
     "Hackerland is a one-dimensional city with houses aligned at integral locations along a road. The Mayor wants to install radio transmitters on the roofs of the city's houses. Each transmitter has a fixed range meaning it can transmit a signal to all houses within that number of units distance away.",
     "Given a map of Hackerland and the transmission range, determine the minimum number of transmitters so that every house is within range of at least one transmitter. Each transmitter must be installed on top of an existing house.",
@@ -380,7 +380,7 @@ export const contest001: Contest = {
   title: "Fraudulent Activity Notifications",
   tags: ["Array", "Median", "Sliding Window", "Counting Sort"],
   difficulty: "Medium",
-  acceptanceRate: 0,
+  acceptanceRate: 50.00,
   statement: [
     "HackerLand National Bank has a simple policy for warning clients about possible fraudulent account activity. If the amount spent by a client on a particular day is greater than or equal to twice the client's median spending for a trailing number of days, the bank sends a notification.",
     "The bank does not send notifications until it has at least the specified number of trailing days of transaction data.",
@@ -632,7 +632,7 @@ private static int getTwiceMedian(int[] count, int d) {
   title: "Sherlock and Anagrams",
   tags: ["String", "Hashing", "Frequency Array"],
   difficulty: "Medium",
-  acceptanceRate: 0,
+  acceptanceRate: 100.00,
   statement: [
     "Two strings are anagrams of each other if the letters of one string can be rearranged to form the other string.",
     "Given a string, find the number of pairs of substrings of the string that are anagrams of each other.",
