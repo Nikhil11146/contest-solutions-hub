@@ -415,8 +415,8 @@ export const contest001: Contest = {
     "For example, if the sorted window is [10, 20, 30], the median is 20 and twice the median is 40.",
     "When d is even, there are two middle elements. Their one-indexed positions are d / 2 and d / 2 + 1. Scan the frequency array to find both values.",
     "For example, if the sorted window is [10, 20, 30, 40], the two middle values are 20 and 30. The median is (20 + 30) / 2 = 25, so twice the median is 20 + 30 = 50.",
-    "Once twice the median has been found, compare expenditure[i] * 2 with twice the median. This is equivalent to checking whether expenditure[i] >= 2 * median while avoiding floating-point calculations.",
-    "If expenditure[i] * 2 is greater than or equal to twice the median, increment the notification count.",
+    "Once twice the median has been found, compare expenditure[i] directly with twice the median. This is equivalent to checking whether expenditure[i] >= 2 * median while avoiding floating-point calculations.",
+    "If expenditure[i] is greater than or equal to twice the median, increment the notification count.",
     "After processing the current day, slide the trailing window forward by one position. Remove expenditure[i - d], which is the oldest value in the current window, and add expenditure[i], which becomes part of the window for the next day.",
     "The old window before the update is [i-d, ..., i-1], while the new window after the update is [i-d+1, ..., i].",
     "Because there are only 201 possible expenditure values, each median lookup takes O(201), which is effectively O(1) with respect to n. Each expenditure is inserted and removed from the frequency array once, so the complete algorithm runs in O(n) time.",
@@ -426,25 +426,19 @@ export const contest001: Contest = {
   spaceComplexity: "O(1)",
   code: {
     cpp: `int getTwiceMedian(vector<int>& count, int d) {
-
     int cumulative = 0;
 
     if (d % 2 == 1) {
-
         int middle = d / 2 + 1;
 
         for (int value = 0; value <= 200; value++) {
-
             cumulative += count[value];
 
             if (cumulative >= middle) {
                 return 2 * value;
             }
         }
-    }
-
-    else {
-
+    } else {
         int firstMiddle = d / 2;
         int secondMiddle = d / 2 + 1;
 
@@ -452,7 +446,6 @@ export const contest001: Contest = {
         int second = -1;
 
         for (int value = 0; value <= 200; value++) {
-
             cumulative += count[value];
 
             if (first == -1 && cumulative >= firstMiddle) {
@@ -471,9 +464,7 @@ export const contest001: Contest = {
     return 0;
 }
 
-
 int activityNotifications(vector<int> expenditure, int d) {
-
     int n = expenditure.size();
     int notifications = 0;
 
@@ -484,10 +475,9 @@ int activityNotifications(vector<int> expenditure, int d) {
     }
 
     for (int i = d; i < n; i++) {
-
         int twiceMedian = getTwiceMedian(count, d);
 
-        if (expenditure[i] * 2 >= twiceMedian) {
+        if (expenditure[i] >= twiceMedian) {
             notifications++;
         }
 
@@ -498,22 +488,17 @@ int activityNotifications(vector<int> expenditure, int d) {
     return notifications;
 }`,
     python: `def get_twice_median(count, d):
-
     cumulative = 0
 
     if d % 2 == 1:
-
         middle = d // 2 + 1
 
         for value in range(201):
-
             cumulative += count[value]
 
             if cumulative >= middle:
                 return 2 * value
-
     else:
-
         first_middle = d // 2
         second_middle = d // 2 + 1
 
@@ -521,7 +506,6 @@ int activityNotifications(vector<int> expenditure, int d) {
         second = -1
 
         for value in range(201):
-
             cumulative += count[value]
 
             if first == -1 and cumulative >= first_middle:
@@ -533,9 +517,10 @@ int activityNotifications(vector<int> expenditure, int d) {
 
         return first + second
 
+    return 0
+
 
 def activityNotifications(expenditure, d):
-
     n = len(expenditure)
     notifications = 0
 
@@ -545,10 +530,9 @@ def activityNotifications(expenditure, d):
         count[expenditure[i]] += 1
 
     for i in range(d, n):
-
         twice_median = get_twice_median(count, d)
 
-        if expenditure[i] * 2 >= twice_median:
+        if expenditure[i] >= twice_median:
             notifications += 1
 
         count[expenditure[i - d]] -= 1
@@ -556,7 +540,6 @@ def activityNotifications(expenditure, d):
 
     return notifications`,
     java: `public static int activityNotifications(List<Integer> expenditure, int d) {
-
     int n = expenditure.size();
     int notifications = 0;
 
@@ -567,10 +550,9 @@ def activityNotifications(expenditure, d):
     }
 
     for (int i = d; i < n; i++) {
-
         int twiceMedian = getTwiceMedian(count, d);
 
-        if (expenditure.get(i) * 2 >= twiceMedian) {
+        if (expenditure.get(i) >= twiceMedian) {
             notifications++;
         }
 
@@ -582,24 +564,19 @@ def activityNotifications(expenditure, d):
 }
 
 private static int getTwiceMedian(int[] count, int d) {
-
     int cumulative = 0;
 
     if (d % 2 == 1) {
-
         int middle = d / 2 + 1;
 
         for (int value = 0; value <= 200; value++) {
-
             cumulative += count[value];
 
             if (cumulative >= middle) {
                 return 2 * value;
             }
         }
-
     } else {
-
         int firstMiddle = d / 2;
         int secondMiddle = d / 2 + 1;
 
@@ -607,7 +584,6 @@ private static int getTwiceMedian(int[] count, int d) {
         int second = -1;
 
         for (int value = 0; value <= 200; value++) {
-
             cumulative += count[value];
 
             if (first == -1 && cumulative >= firstMiddle) {
@@ -624,9 +600,9 @@ private static int getTwiceMedian(int[] count, int d) {
     }
 
     return 0;
-}`,
+}`
   },
-    },
+},
     {
   slug: "sherlock-and-anagrams",
   title: "Sherlock and Anagrams",
